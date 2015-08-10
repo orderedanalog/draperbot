@@ -239,6 +239,14 @@ header .header-content .header-content-inner p {
     }
 }
 
+input{
+	background-color: #e7d4ff;
+    color: #5d5d5d;
+    height: 44px;
+    width: 326px;
+    margin-right: 15px;
+}
+
 .section-heading {
     margin-top: 0;
 }

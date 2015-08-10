@@ -19,6 +19,9 @@
     <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
 
+	<!-- Lightcase CSS-->
+	<link rel="stylesheet" type="text/css" href="css/lightcase.css">
+
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="css/animate.min.css" type="text/css">
 
@@ -53,16 +56,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="#about">About</a>
+                        <a class="page-scroll" href="#demo">Try draperBot</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Services</a>
+                        <a class="page-scroll" href="#whatisit">What Is It?</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                        <a class="page-scroll" href="#news">News</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" href="#commit">Commit</a>
                     </li>
                 </ul>
             </div>
@@ -76,30 +79,33 @@
             <div class="header-content-inner">
                 <h1>AN OPEN SOURCE FRAMEWORK BUILT TO UNLOCK DEEP EMOTIONAL MEANING IN LANGUAGE</h1>
                 <hr>
-                <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+                <p>draperBot is a set of tools, frameworks and data constructs leveraging principles of semiotics to develop a new approach to language, communication and message meaning.</p>
+                <a href="#demo" class="btn btn-primary btn-xl page-scroll">Try draperBot Now!</a>
             </div>
         </div>
     </header>
 
-    <section class="bg-primary" id="about">
+    <section class="bg-primary" id="demo">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">We've got what you need!</h2>
+                    <h2 class="section-heading">draperBot Live Demonstration</h2>
                     <hr class="light">
-                    <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
-                    <a href="#" class="btn btn-default btn-xl">Get Started!</a>
+                    <p class="text-faded">
+                    See what draperBot knows about your site and your site’s audience (it might not be that much, but we figured we wait until the end of sentence to break that news):
+                   </p>
+                     <input type="text" id="webpageToTest" name="webpageToTest" width="200" placeholder="Enter website" /><a href="#" class="btn btn-default btn-xl">Go</a>
+                     <div id="draperResultArea"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services">
+    <section id="whatisit">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">At Your Service</h2>
+                    <h2 class="section-heading">Wait.  What is draperBot again?</h2>
                     <hr class="primary">
                 </div>
             </div>
@@ -108,37 +114,61 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
-                        <h3>Sturdy Templates</h3>
-                        <p class="text-muted">Our templates are updated regularly so they don't break.</p>
+                        <i class="fa fa-4x fa-code-fork wow bounceIn text-primary"></i>
+                        <h3>Why draperBot</h3>
+                        <p class="text-muted">Where did draperBot come from and what are we solving here?</p>
+                        <br/>
+                        <a href="#section1detail" data-rel="lightcase">Learn More</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        <h3>Ready to Ship</h3>
-                        <p class="text-muted">You can use this theme as is, or you can make changes!</p>
+                        <h3>Making Sense Of It </h3>
+                        <p class="text-muted">Developing sophisticated meaning from our communication has grown society, maybe our thinking should catch up?</p>
+                        <br/>
+                        <a href="#section2detail" data-rel="lightcase" >Learn More</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                        <h3>Up to Date</h3>
-                        <p class="text-muted">We update dependencies to keep things fresh.</p>
+                      <h3>State Of The Bot</h3>
+                        <p class="text-muted">How does it work?  What technologies are being used today?</p>
+                        <br/>
+                        <a href="#section3detail" data-rel="lightcase" ">Learn More</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                        <h3>Made with Love</h3>
-                        <p class="text-muted">You have to make your websites with love these days!</p>
+                        <h3>Tomorrow&#x27;s Journey</h3>
+                        <p class="text-muted">Where could you take draperBot tomorrow?  That&#x27;s up-to-you, but we&#x27;ve got some ideas that could help.</p>
+                        <br/>
+                        <a href="#section4detail" data-rel="lightcase" ">Learn More</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+	<div style="display:none" id="section1detail">
+		<h4>Working (1)</h4>
+		<p>Still working on producing some awesome stuff here</p>
+	</div>
+	<div style="display:none" id="section2detail">
+		<h4>Working (2)</h4>
+		<p>Still working on producing some awesome stuff here</p>
+	</div>
+	<div style="display:none" id="section3detail">
+		<h4>Working (3)</h4>
+		<p>Still working on producing some awesome stuff here</p>
+	</div>
+	<div style="display:none" id="section4detail">
+		<h4>Working (4)</h4>
+		<p>Still working on producing some awesome stuff here</p>
+	</div>
 
-    <section class="no-padding" id="portfolio">
+    <section class="no-padding" id="news">
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
@@ -235,11 +265,11 @@
         </div>
     </section>
 
-    <aside class="bg-dark">
+    <aside class="bg-dark" id="commit">
         <div class="container text-center">
             <div class="call-to-action">
-                <h2>Free Download at Start Bootstrap!</h2>
-                <a href="#" class="btn btn-default btn-xl wow tada">Download Now!</a>
+                <h2>Commit To Helping, Literally. <br/> Download draperBot on GitHub</h2>
+                <a href="https://github.com/orderedanalog/draperbot" class="btn btn-default btn-xl tada">View On GitHub</a>
             </div>
         </div>
     </aside>
@@ -250,15 +280,11 @@
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Let's Get In Touch!</h2>
                     <hr class="primary">
-                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <p>Want to learn even more, or interesting in having a draperBot discussion at your event? Send us an email and we will get back to you as soon as possible!</p>
                 </div>
-                <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                    <p>123-456-6789</p>
-                </div>
-                <div class="col-lg-4 text-center">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
                     <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                    <p><a href="mailto:masterbot@draperbot.com">masterbot@draperbot.com</a></p>
                 </div>
             </div>
         </div>
@@ -278,7 +304,25 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/creative.js"></script>
     
-    <script src="js/tags.js"></script>
+    <!-- Lightcase Setup -->
+    <script type="text/javascript" src="js/lightcase.js"></script>
+    <script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$('a[data-rel^=lightcase]').lightcase();
+		});
+	</script>
+    
+    <!-- Google Analytics-->
+    <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-66069031-1', 'auto');
+	  ga('send', 'pageview');
+	
+	</script>
 
 </body>
 
