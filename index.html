@@ -207,19 +207,19 @@
                 </div>
                 <div id="2RioJ0jVq0KWioQSGQ8OUo" style="display:none">
 	                <h4>Vote For This SxSW 2016 Session in Panel Picker</h4>
+
 					<br/>
-					<img src="http://images.contentful.com/rik7wa7oqkgl/1CyeusYUysIqKEQ2EOiG68/e7b4f4d9b107034c7fa727ce93633426/sxsw-2016-panelpicker-graphic.jpg">
+					<img height="200" style="height:200px" src="http://images.contentful.com/rik7wa7oqkgl/1CyeusYUysIqKEQ2EOiG68/e7b4f4d9b107034c7fa727ce93633426/sxsw-2016-panelpicker-graphic.jpg" onload="load_disqus()">
 					<br/>
 
 					<br/>
 	                <p class="encodeme">Attention SxSW Peeps!
 
 &lt;br/&gt;
-The SxSW 2016 PanelPicker is now open for voting!  And draperBot is represented by a submission entitled &lt;strong&gt;AI Gets Emotional With Global Marketing&lt;/strong&gt;.  Take a look at the entry here:&lt;br/&gt;
+The SxSW 2016 PanelPicker is now open for voting!  And draperBot is represented by a submission entitled &lt;strong&gt;AI Gets Emotional With Global Marketing&lt;/strong&gt;.  Take a look at the entry here:
+&lt;br style=&quot;height:10px;&quot;&gt;&amp;nbsp;&lt;/br&gt;
 &lt;a href=&quot;http://panelpicker.sxsw.com/vote/49178&quot;&gt;http://panelpicker.sxsw.com/vote/49178&lt;/a&gt;
-
-&lt;br/&gt;
-
+&lt;br style=&quot;height:10px;&quot;&gt;&amp;nbsp;&lt;/br&gt;
 AND don&#x27;t forget to vote (thumbs up would be the better vote)!</p>
 	                
               
@@ -239,9 +239,20 @@ AND don&#x27;t forget to vote (thumbs up would be the better vote)!</p>
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
                   </div>
+                  
             </div>
         </div>
     </section>
+<script type="text/javascript">
+    var load_disqus = function()
+    {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = "http://draperbot.disqus.com/embed.js";
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      var ldr = document.getElementById('disqus_loader');
+      ldr.parentNode.removeChild(ldr);
+    }
+  </script>
     
     <aside class="bg-dark" id="commit">
         <div class="container text-center">
@@ -290,15 +301,22 @@ AND don&#x27;t forget to vote (thumbs up would be the better vote)!</p>
     <script type="text/javascript" src="js/lightcase.js"></script>
     <script type="text/javascript">
 		jQuery(document).ready(function($) {
-			$('a[data-rel^=lightcase]').lightcase();
+			$('a[data-rel^=lightcase]').lightcase({
+				maxWidth: 1050,
+				maxHeight: 650}
+				);
 		});
 	</script>
    
     <script type="text/javascript">
 	$('i[data-rel=lightcase').lightcase({
-		transition: 'scrollHorizontal'
+		transition: 'scrollHorizontal',
+		maxWidth: 1100
 	});
 	</script>
+	
+	
+  
 	<script>
 		jQuery(document).ready(function($) {
 			
