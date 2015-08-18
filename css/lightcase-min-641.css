@@ -28,7 +28,7 @@
 		line-height: 18px;
 		text-align: left;
 
-		color: #aaa;
+		color: #111;
 		text-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 
@@ -111,7 +111,7 @@
 		position: fixed;
 		z-index: 9997;
 
-		top: 15px;
+		top: 65px;
 		right: 15px;
 
 		outline: none;
