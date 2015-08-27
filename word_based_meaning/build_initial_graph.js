@@ -63,13 +63,16 @@ async.waterfall([
 	  	for (var i = 0; i < result.entry_list.entry.length; i++) {
 			if(result.entry_list.entry[i].sens){
 			for (var j = 0; j < result.entry_list.entry[i].sens.length; j++) {	
-				//console.log(inspect(result.entry_list.entry[i].sens[j].syn));
+				console.log(inspect(result.entry_list.entry[i].sens[j].syn));
 				if(result.entry_list.entry[i].sens[j].syn[0]._){
 					var synonyms_string = JSON.stringify(result.entry_list.entry[i].sens[j].syn[0]._);
+					synonyms_string = synonyms_string.slice(1,synonyms_string.length-1);
 				}else{
 			  		var synonyms_string = JSON.stringify(result.entry_list.entry[i].sens[j].syn);
+			  		synonyms_string = synonyms_string.slice(2,synonyms_string.length-2);
 			  	}
-		  		synonyms_string = synonyms_string.slice(2,synonyms_string.length-2); // get rid of stupid syntax from xml2js
+			  	
+		  		
 		  		var options = {
 				    include_script : false,
 				    include_style : false,
@@ -79,10 +82,12 @@ async.waterfall([
 
 				// Strip tags and decode HTML entities
 				var synonyms_string = html_strip.html_strip(synonyms_string,options);
+		  		
 		  		synonyms_string = synonyms_string.replace(/<\/?[^>]+(>|$)/g, "");
 		  		synonyms_string = synonyms_string.replace(";",",");
 		  		synonyms_string = synonyms_string.match(/\w+(?![^\x28]*\x29)(?![^[]*])/g,"");
 		  		array = array.concat(synonyms_string);
+		  	
 		  	}
 		  	}
 	  	}
@@ -97,8 +102,9 @@ async.waterfall([
 	  	
 	  	//remove parent from child array
 	  	var index = array.indexOf(driver_or_syn);
-	  	if (index > -1) {
-	  		array.splice(index, 1);
+	  	while(index > -1){
+		  	array.splice(index, 1);
+		  	index = array.indexOf(driver_or_syn, index+1);
 		}
 	  	console.log(array);
 	  	callback(null,array)
