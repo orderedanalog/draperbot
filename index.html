@@ -23,6 +23,10 @@
 
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+    
+    <!--Chartist CSS-->
+    <link rel="stylesheet"
+          href="bower_components/chartist/dist/chartist.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
@@ -51,6 +55,9 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
+	
+	
+	
 </head>
 <body id="page-top">
 
@@ -103,21 +110,38 @@
     <section class="bg-primary" id="demo">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
+                <div  class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">draperBot Live Demonstration</h2>
                     <hr class="light">
-                    <p class="text-faded">
+                    <div id="botinput">
+                    <p id="preinputtext" class="text-faded">
                     See what draperBot knows about your site and your site’s audience (it might not be that much, but we figured we wait until the end of sentence to break that news):
                    </p>
-                     <input type="text" id="webpageToTest" name="webpageToTest" width="200" placeholder="Enter website" /><a href="#thebot" data-rel="lightcase" class="btn btn-default btn-xl">Go</a>
-                     <div id="draperResultArea"></div>
+                     <input type="text" id="webpageToTest" name="webpageToTest" width="200" placeholder="http://your.website" /><a href="javascript:runBot()"  class="btn btn-default btn-xl" id="webpageToTestButton">Go</a>
+                    <p id="postinputtext" class="text-faded" style="margin-top:15px;"></p>
+                    
+                    </div>
+                    <div id="botloader" style="display:none;padding-top: 45px;">
+
+                	<div class="cssload-loader">
+						<div class="cssload-flipper">
+							<div class="cssload-front"></div>
+							<div class="cssload-back"></div>
+						</div>
+					</div>
+					</div>
+
+                     <div id="botresult" class="ct-chart ct-double-octave" style="display:none">
+	                 
+                     </div>
                 </div>
-            </div>
+                            </div>
         </div>
     </section>
+    <a href="#thebot" style="display:none" id="demoerror"></a>
 	<div id="thebot" style="display:none">
-	<h4>Oops!  Awesomeness is coming.</h4>
-	<p>The draperBot is offline right now.  But its coming back soon!  If you can't wait to find out more, PM me on twitter <a href="https://twitter.com/jwsfl">@jwsfl</a>.
+	<h4>Oops!</h4>
+	<p>The website you entered isn't sure how it feels about itself.  Seriously, its probably awesome, but we can't tell. Try another site.</p>
 	</div>
     <section id="whatisit">
         <div class="container">
@@ -170,7 +194,7 @@
         </div>
     </section>
 	<div style="display:none" id="section1detail">
-		<a style="float:right" href="#">download draperBot <span style="background-color:black;color:white;">whitepaper</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-2x fa-download text-secondary"></i></a>
+		<a style="float:right" href="javascript:void();">download draperBot <span style="background-color:black;color:white;">whitepaper</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-2x fa-download text-secondary"></i></a>
 
 		<p class="encodeme">&lt;h4&gt;Why draperBot?&lt;/h4&gt;
 &lt;br style=&quot;height:10px;&quot;&gt;&amp;nbsp;&lt;/br&gt;
@@ -187,7 +211,7 @@ The &lt;i&gt;true goal of this project&lt;/i&gt; is for us to device a framework
 What if we could build a framework that catalogs the underlying meaning of our marketing communication, messaging, symbols and words? Then instead of storing a behavioral log of individuals, we develop a more privacy-friendly personality index that combines together with this catalog of potential meaning/significance would give marketers a data-driven predictive tool guiding their choices without the potential big-brother tactics being employed today.  Currently companies are storing massive amounts of personal behavior information and whether this information is stolen by hackers for identity theft or used against them like in the case of Chinese citizens, who voicemails have been used to convict them of sedition, the simple fact is that we as marketers still don’t seem know that much about our audience.  Understanding the impact our messaging or communication will have all across the globe will enable us as marketers to know more than recording the last 100 websites someone has visited.  The fact that we do have the ability to track, store and analyze behavior is almost a case of technology outpacing the people using it (us marketers), in that we have this ability but we still don’t know what significance our advertising will have in 40 different countries until we spend the media or post the message.  Perhaps a data-driven framework could even give us a glimpse of what will happen before we actually spent the money to run a marketing campaign or effort?</p>
 	</div>
 	<div style="display:none" id="section2detail">
-		<a style="float:right" href="#">download draperBot <span style="background-color:black;color:white;">whitepaper</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-2x fa-download text-secondary"></i></a>
+		<a style="float:right" href="javascript:void();">download draperBot <span style="background-color:black;color:white;">whitepaper</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-2x fa-download text-secondary"></i></a>
 
 		<p class="encodeme">TBD</p>
 	</div>
@@ -243,6 +267,53 @@ AND don&#x27;t forget to vote (thumbs up would be the better vote)!</p>
     var disqus_shortname = 'draperbot';
     var disqus_identifier = '2RioJ0jVq0KWioQSGQ8OUo';
     var disqus_title = 'SxSW 2016 Voting Open!';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                  </div>
+                  
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#3Z0V9JfSQgKS0ESKAMqwuw" data-rel="lightcase" class="portfolio-box">
+                        <img src="http://images.contentful.com/rik7wa7oqkgl/5VVw3j4SMEs8e6U2WSsGc2/afe967a0e46efc8739dec8b26f0d7c57/science_2.0.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Latest AI News From Science 2.0
+                                </div>
+                                <div class="project-name">
+                                    What Emotions Do We Want AI To Have?
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div id="3Z0V9JfSQgKS0ESKAMqwuw" style="display:none">
+	                <h4>What Emotions Do We Want AI To Have?</h4>
+
+					<br/>
+					<img height="200" style="height:200px" src="http://images.contentful.com/rik7wa7oqkgl/5VVw3j4SMEs8e6U2WSsGc2/afe967a0e46efc8739dec8b26f0d7c57/science_2.0.jpg" onload="load_disqus()">
+					<br/>
+
+					<br/>
+	                <p class="encodeme">Forget the Turing and Lovelace tests on artificial intelligence: I want to see a robot pass the Frampton Test.
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;
+Read more on &lt;a href=&quot;http://www.science20.com/the_conversation/artificial_intelligence_its_time_to_talk_about_what_emotions_we_want_ai_to_have-157014&quot;&gt;Science 2.0&lt;/a&gt;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;
+</p>
+	                
+              
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'draperbot';
+    var disqus_identifier = '3Z0V9JfSQgKS0ESKAMqwuw';
+    var disqus_title = 'Latest AI News From Science 2.0';
     
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -315,7 +386,18 @@ AND don&#x27;t forget to vote (thumbs up would be the better vote)!</p>
     <script type="text/javascript" src="js/lightcase.js"></script>
     <script type="text/javascript">
 		jQuery(document).ready(function($) {
-			$('a[data-rel^=lightcase]').lightcase({
+			var demoerror = $('#demoerror').lightcase({
+				maxWidth: 1050,
+				maxHeight: 650,
+				onClose : {
+					qux: function() {
+						$("#botloader").hide();
+						$("#botinput").fadeIn();
+					}
+				}
+				});
+
+			$('a[data-rel=lightcase]').lightcase({
 				maxWidth: 1050,
 				maxHeight: 650}
 				);
@@ -335,7 +417,104 @@ AND don&#x27;t forget to vote (thumbs up would be the better vote)!</p>
 	});
 	</script>
 	
+	<script src="bower_components/chartist/dist/chartist.min.js"></script>
+	<script src="bower_components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
+
 	
+	<script type="text/javascript">
+		$("#webpageToTest").keyup(function (e) {
+			if (e.keyCode == 13) {
+			runBot();
+    		}
+		});
+		var runBot = function(){
+			$('.chartist-tooltip').remove();
+			var data = { "siteurl":$("#webpageToTest").val() };
+			$("#botinput").hide();
+			$("#botloader").show();
+			$.post("https://s5ga03wms5.execute-api.us-east-1.amazonaws.com/prod/siteeval",
+			  JSON.stringify(data),
+			  function( data ) {
+			  	//alert( data.replace('"','').replace('\'','"') );
+			  	if(data.errorMessage !=undefined || data.indexOf("NaN")!=-1){
+				  	$('#demoerror').click()
+			  	}else{
+			  	var botdata =  JSON.parse(data.replace(/"/gi,'').replace(/'/gi,'"'));
+			  	if((botdata.learn != undefined && botdata.acquire != undefined && botdata.feel != undefined && botdata.bond != undefined && botdata.defend != undefined) && !isNaN(botdata.learn) && !isNaN(botdata.acquire) && !isNaN(botdata.feel) && !isNaN(botdata.bond) && !isNaN(botdata.defend)){
+			  	
+			  	$("#botloader").hide();
+			  	$("#preinputtext").html("");
+			  	var url = $("#webpageToTest").val()
+			  	if(url.indexOf('draperbot.com')!=-1){
+				  	$("#postinputtext").html("Hey, I'm flattered, but there are better sites than me to test. Below are the core emotional desires this website is driving.");				  	
+			  	}else{
+					$("#postinputtext").html("Below are the core emotional desires this website is driving.");				  	
+			  	}
+
+			  	$("#webpageToTestButton").html("Go Again")
+			  	$("#botinput").fadeIn();
+			  	$("#botresult").show();
+			  	
+			  	
+			  	var chartdata = {
+				  // A labels array that can contain any sort of values
+				  labels: [' '],
+				  // Our series array that contains series objects or in this case series data arrays
+				  series: [
+				    [{value: botdata.learn, meta: 'Learn'}],
+				    [{value: botdata.acquire, meta: 'Acquire'}],
+				    [{value: botdata.feel, meta: 'Experience'}],
+				    [{value: botdata.bond, meta: 'Bond'}],
+				    [{value: botdata.defend, meta: 'Defend'}]
+				  ]
+				};
+				
+				// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+				// as you saw in the previous example
+				var options = {
+				  stackBars: true,
+					  
+					  reverseData: false,
+					  horizontalBars: true,
+				  axisX:{
+					  showGrid:false,
+					  showLabel:false
+				  },
+				  axisY:{
+				  	 showLabel:false
+				  },
+  				  plugins:[
+	  				  Chartist.plugins.tooltip()
+  				  ]
+				  
+				};
+				
+				// Create a new line chart object where as first parameter we pass in a selector
+				// that is resolving to our chart container element. The Second parameter
+				// is the actual data object. As a third parameter we pass in our custom options.
+				var chart = new Chartist.Bar('.ct-chart', chartdata, options);
+				
+				chart.on('draw', function(data) {
+	            if(data.x2-data.x1 > 50) {
+	              data.group.elem('text', {
+	                x: data.x1+(((data.x2+.00001)-data.x1)/2),
+	                y: 90,
+	                width: (data.x2+.00001)-data.x1,
+	                height: 'auto',
+	                style: 'text-anchor: middle;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;fill:white;font-size: large;'
+	              }, options.labelClass).text(data.meta)
+	            }
+	            });
+	           	
+			  }else{
+				  $('#demoerror').click()
+			  }
+			  }
+			  }
+  			);
+		};
+		
+	</script>
   
 	<script>
 		jQuery(document).ready(function($) {

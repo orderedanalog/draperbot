@@ -495,3 +495,169 @@ body {
 .fa {
 	cursor: pointer;
 }
+
+.cssload-loader {
+	width: 78px;
+	height: 78px;
+	position: absolute;
+	left: 50%;
+	transform: translate3d(-50%, -50%, 0);
+		-o-transform: translate3d(-50%, -50%, 0);
+		-ms-transform: translate3d(-50%, -50%, 0);
+		-webkit-transform: translate3d(-50%, -50%, 0);
+		-moz-transform: translate3d(-50%, -50%, 0);
+	perspective: 1200;
+		-o-perspective: 1200;
+		-ms-perspective: 1200;
+		-webkit-perspective: 1200;
+		-moz-perspective: 1200;
+}
+
+.cssload-flipper {
+	position: relative;
+	display: block;
+	height: inherit;
+	width: inherit;
+	animation: cssload-flip 1.38s infinite ease-in-out;
+		-o-animation: cssload-flip 1.38s infinite ease-in-out;
+		-ms-animation: cssload-flip 1.38s infinite ease-in-out;
+		-webkit-animation: cssload-flip 1.38s infinite ease-in-out;
+		-moz-animation: cssload-flip 1.38s infinite ease-in-out;
+	transform-style: preserve-3d;
+		-o-transform-style: preserve-3d;
+		-ms-transform-style: preserve-3d;
+		-webkit-transform-style: preserve-3d;
+		-moz-transform-style: preserve-3d;
+}
+
+.cssload-front,
+.cssload-back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	background-color: rgb(214,112,214);
+	height: 100%;
+	width: 100%;
+	backface-visibility: hidden;
+}
+
+.cssload-back {
+	background-color: rgba(255,255,255,0.97);
+	z-index: 800;
+	transform: rotateY(-180deg);
+		-o-transform: rotateY(-180deg);
+		-ms-transform: rotateY(-180deg);
+		-webkit-transform: rotateY(-180deg);
+		-moz-transform: rotateY(-180deg);
+}
+
+
+
+@keyframes cssload-flip {
+	0% {
+		transform: perspective(375px) rotateX(0deg) rotateY(0deg);
+	}
+	50% {
+		transform: perspective(375px) rotateX(-180.1deg) rotateY(0deg);
+	}
+	100% {
+		transform: perspective(375px) rotateX(-180deg) rotateY(-179.9deg);
+	}
+}
+
+@-o-keyframes cssload-flip {
+	0% {
+		-o-transform: perspective(375px) rotateX(0deg) rotateY(0deg);
+	}
+	50% {
+		-o-transform: perspective(375px) rotateX(-180.1deg) rotateY(0deg);
+	}
+	100% {
+		-o-transform: perspective(375px) rotateX(-180deg) rotateY(-179.9deg);
+	}
+}
+
+@-ms-keyframes cssload-flip {
+	0% {
+		-ms-transform: perspective(375px) rotateX(0deg) rotateY(0deg);
+	}
+	50% {
+		-ms-transform: perspective(375px) rotateX(-180.1deg) rotateY(0deg);
+	}
+	100% {
+		-ms-transform: perspective(375px) rotateX(-180deg) rotateY(-179.9deg);
+	}
+}
+
+@-webkit-keyframes cssload-flip {
+	0% {
+		-webkit-transform: perspective(375px) rotateX(0deg) rotateY(0deg);
+	}
+	50% {
+		-webkit-transform: perspective(375px) rotateX(-180.1deg) rotateY(0deg);
+	}
+	100% {
+		-webkit-transform: perspective(375px) rotateX(-180deg) rotateY(-179.9deg);
+	}
+}
+
+@-moz-keyframes cssload-flip {
+	0% {
+		-moz-transform: perspective(375px) rotateX(0deg) rotateY(0deg);
+	}
+	50% {
+		-moz-transform: perspective(375px) rotateX(-180.1deg) rotateY(0deg);
+	}
+	100% {
+		-moz-transform: perspective(375px) rotateX(-180deg) rotateY(-179.9deg);
+	}
+}
+
+.ct-series-a .ct-bar {
+  /* Colour of your bars */
+  stroke: #8888dd;
+  /* The width of your bars */
+  stroke-width: 150px;
+
+}
+.ct-series-b .ct-bar {
+  /* Colour of your bars */
+  stroke: #aaccff;
+  /* The width of your bars */
+  stroke-width: 150px;
+
+}
+.ct-series-c .ct-bar {
+  /* Colour of your bars */
+  stroke: #9988bb;
+  /* The width of your bars */
+  stroke-width: 150px;
+
+}
+.ct-series-d .ct-bar {
+  /* Colour of your bars */
+  stroke: #333;
+  /* The width of your bars */
+  stroke-width: 150px;
+
+}
+.ct-series-e .ct-bar {
+  /* Colour of your bars */
+  stroke: #9944cc;
+  /* The width of your bars */
+  stroke-width: 150px;
+
+}
+
+.chartist-tooltip {
+	background-color: rgba(255, 255, 255, 0.75);
+    color: #333;
+    width: 150px;
+    height: 70px;
+    z-index: 1000;
+    border-radius: 7px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: large;
+    position: relative;
+}
