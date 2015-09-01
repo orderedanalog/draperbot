@@ -495,10 +495,10 @@ Read more on &lt;a href=&quot;http://www.science20.com/the_conversation/artifici
 				var chart = new Chartist.Bar('.ct-chart', chartdata, options);
 				
 				chart.on('draw', function(data) {
-	            if(data.x2-data.x1 > 50) {
+	            if(data.x2-data.x1 > 60) {
 	              data.group.elem('text', {
 	                x: data.x1+(((data.x2+.00001)-data.x1)/2),
-	                y: 90,
+	                y: "50%",
 	                width: (data.x2+.00001)-data.x1,
 	                height: 'auto',
 	                style: 'text-anchor: middle;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;fill:white;font-size: large;'
