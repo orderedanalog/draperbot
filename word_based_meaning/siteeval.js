@@ -2,6 +2,7 @@
 var request = require('request');
 var async = require('async');
 var htmlToText = require('html-to-text');
+var validUrl = require('valid-url');
 
 var uselesswords = ["a", "about", "above", "above", "across", "after", "afterwards", "again", "against", "all", "almost", "alone", "along", "already", "also","although","always","am","among", "amongst", "amoungst", "amount",  "an", "and", "another", "any","anyhow","anyone","anything","anyway", "anywhere", "are", "around", "as",  "at", "back","be","became", "because","become","becomes", "becoming", "been", "before", "beforehand", "behind", "being", "below", "beside", "besides", "between", "both", "bottom","but", "by", "call", "can", "cannot", "cant", "co", "con", "could", "couldnt", "cry", "de", "describe", "detail", "do", "done", "down", "due", "during", "each", "eg", "eight", "either", "eleven","else", "elsewhere", "empty", "enough", "etc", "even", "ever", "every", "everyone", "everything", "except", "few", "fifteen", "fifty", "fill", "find", "first", "five", "for", "former", "formerly", "forty", "found", "four", "from", "front", "full", "further", "get", "give", "go", "had", "has", "hasnt", "have", "he", "hence", "her", "here", "hereafter", "hereby", "herein", "hereupon", "hers", "herself", "him", "himself", "his", "how", "however", "hundred", "ie", "if", "in", "inc", "indeed", "interest", "into", "is", "it", "its", "itself", "keep", "last", "latter", "latterly", "least", "less", "ltd", "made", "many", "may", "me", "meanwhile", "might", "mill", "mine", "more", "moreover", "most", "mostly", "move", "much", "must", "my", "myself", "name", "namely", "neither", "never", "nevertheless", "next", "nine", "no", "nobody", "none", "noone", "nor", "not", "nothing", "now", "nowhere", "of", "off", "often", "on", "once", "one", "only", "onto", "or", "other", "others", "otherwise", "our", "ours", "ourselves", "out", "over", "own","part", "per", "perhaps", "please", "put", "rather", "re", "same", "see", "seem", "seemed", "seeming", "seems", "serious", "several", "she", "should", "show", "side", "since", "sincere", "six", "sixty", "so", "some", "somehow", "someone", "something", "sometime", "sometimes", "somewhere", "still", "such", "system", "take", "ten", "than", "that", "the", "their", "them", "themselves", "then", "thence", "there", "thereafter", "thereby", "therefore", "therein", "thereupon", "these", "they", "thickv", "thin", "third", "this", "those", "though", "three", "through", "thru", "thus", "to", "together", "too", "top", "toward", "towards", "twelve", "twenty", "two", "un", "under", "until", "up", "upon", "us", "very", "via", "was", "we", "well", "were", "what", "whatever", "when", "whence", "whenever", "where", "whereafter", "whereas", "whereby", "wherein", "whereupon", "wherever", "whether", "which", "while", "whither", "who", "whoever", "whole", "whom", "whose", "why", "will", "with", "within", "without", "would", "yet", "you", "your", "yours", "yourself", "yourselves", "the","this","com","buy"];
 
@@ -10855,10 +10856,12 @@ var graphdb = {
 
 var min_relevancy = 5;
 
-var finalscoring =[];
-var exportarray = [];
+var finalscoring = new Array();
+var exportarray = new Array();
 
-var wordsdb = [];
+var wordsdb = new Array();
+
+var desires = ['learn','feel','acquire','defend','bond'];
 
 /**
 * Primary AWS Lambda call
@@ -10868,15 +10871,30 @@ var wordsdb = [];
 * @param {Object} context - AWS callback object and handler
 */
 exports.handler = function(event, context) {
-	
+
+
 if(event.siteurl === undefined){
 	context.done('error','invalid url provided');
 }else{
+	if (!validUrl.isUri(event.siteurl)){
+        
+        event.siteurl = "http://"+event.siteurl;
+        if (!validUrl.isUri(event.siteurl))
+		{
+			context.done('error','invalid url provided.');
+			return;	
+		}
+    } 
+    
+    console.log('Looks like a valid URL '+event.siteurl);
+    
+
 
 var brandurl = event.siteurl;
 
 async.series([
 	function(callback_middle){
+		wordsdb.splice(0,wordsdb.length);
 		insertContentFromPages(brandurl,callback_middle);
 	},
 	function(callback_middle){
@@ -10885,6 +10903,7 @@ async.series([
 	],function(err,results){
 		tallyScores(context);
 	});
+
 }
 };
 
@@ -10895,22 +10914,31 @@ async.series([
 * @param {Object} callback - internal callback handler
 */
 function getScores(callback){
+	var wordsuniques = new Array();
+	wordsuniques.splice(0,wordsuniques.length);
+	wordsuniques = array_counter(wordsdb);
 	
-	var wordsuniques = array_counter(wordsdb);
-	
-	
-	var testwords = arrayKeys(wordsuniques);
+	var testwords = new Array();
+	testwords.splice(0,testwords.length);
+	testwords = arrayKeys(wordsuniques);
+	console.log(testwords);
+	//Clean arrays, since AWS Lambda leaks memory like a sieve
+	finalscoring.splice(0,finalscoring.length);
+	for(var i=0;i<desires.length;i++){
+		finalscoring[desires[i]]=0;
+	}
 
 	async.eachSeries(testwords, function(testword, cb) {
-	
+		
+		
+		
 		if(graphdb[testword] != undefined && graphdb[testword].scores != undefined){
 			var scores = graphdb[testword].scores;
-
 			if(scores.indexOf(";")>-1){
 				var scoresarray = scores.split(";");
-			
 				for(var i=0; i<scoresarray.length;i++){
 					var scorearray = scoresarray[i].split(":");
+					
 					if( finalscoring[scorearray[0].trim()] === undefined) {
 						finalscoring[scorearray[0].trim()] = scorearray[1]*wordsuniques[testword];
 				   	}else{
@@ -10919,14 +10947,16 @@ function getScores(callback){
 				}
 			}else{
 				var scorearray = scores.split(":");
+				
 				if( finalscoring[scorearray[0].trim()] === undefined) {
 					finalscoring[scorearray[0].trim()] = scorearray[1]*wordsuniques[testword];
 			   	}else{
 				   	finalscoring[scorearray[0].trim()] += scorearray[1]*wordsuniques[testword];
 			   	}
 			}
+			console.log(finalscoring); 
 		}
-	        
+	     
 	        cb(null);
 	    
 	}, function done(){
@@ -10949,27 +10979,30 @@ function tallyScores(context){
 			
 		var total = 0;
 	
+		
 		for(i=0;i<keys.length;i++)
 		{
 			total += finalscoring[keys[i]];
 		}
-		var finaldisplayraw = [];
-		var finaldisplayperct = [];
+		var finaldisplayraw = new Array();
+		finaldisplayraw.splice(0,finaldisplayraw.length);
+		var finaldisplayperct = new Array();
+		finaldisplayperct.splice(0,finaldisplayperct.length);
 		var outputstring = "";
 		for(i=0;i<keys.length;i++)
 		{
 			finaldisplayraw[keys[i]] = finalscoring[keys[i]];
 			finaldisplayperct[keys[i]] = Math.round((finalscoring[keys[i]]/total)*100);
 			if(i==0){
-				outputstring = keys[i]+':'+finaldisplayperct[keys[i]];
+				outputstring = '{ \''+keys[i]+'\':'+finaldisplayperct[keys[i]]+'';
 			}else{
-				outputstring = outputstring+';'+keys[i]+':'+finaldisplayperct[keys[i]];
+				outputstring = outputstring+',\''+keys[i]+'\':'+finaldisplayperct[keys[i]]+'';
 			}
 		}
 		console.log("BRAND SCORE:");
 		console.log(finaldisplayraw);
 		console.log(finaldisplayperct);
-	
+		outputstring = outputstring+"}";
 		context.done(null,outputstring);
 }
 	
@@ -11002,10 +11035,10 @@ function arrayKeys(input) {
 */	
 function insertContentFromPages(brandurl,callback_middle){
 	console.log('Retrieving content from:'+brandurl);
-	request(brandurl, function (error, response, body) {
+	request(brandurl, {followAllRedirects:true}, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 		var text = htmlToText.fromString(body, {
-		  wordwrap: 130
+		  wordwrap: false
 		});
 		addscrapetodb(text,callback_middle);
 	  }
@@ -11038,13 +11071,16 @@ function addscrapetodb(string, callback){
 * @param {Array} counts - returns array with word frequency information
 */	
 function array_counter(a) {
-    var counts = [];
-    var localcounts = [];
+    console.log("a length:"+a.length);
+    var counts = new Array();
+    var localcounts = new Array();
+    counts.splice(0,counts.length);
+    localcounts.splice(0,localcounts.length);
     
     for(var i = 0; i <= a.length; i++) {
 	    var word = a[i];
 	    
-	    if(word != undefined && word.length>2 && uselesswords.indexOf(word.toLowerCase())===-1){
+	    if(word != undefined && word.length>2 && uselesswords.indexOf(word.toLowerCase())===-1 && !isNumber(word)){
 	        word = word.toLowerCase();
 	        if( localcounts[word] === undefined) {
 	            localcounts[word] = 1;
@@ -11062,3 +11098,5 @@ function array_counter(a) {
     //console.log(counts);
     return counts;
 }
+
+function isNumber(obj) { return !isNaN(parseFloat(obj)) }
