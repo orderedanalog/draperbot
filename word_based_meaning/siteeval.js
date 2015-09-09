@@ -3,6 +3,7 @@ var request = require('request');
 var async = require('async');
 var htmlToText = require('html-to-text');
 var validUrl = require('valid-url');
+var urllib = require('url');
 
 var uselesswords = ["a", "about", "above", "above", "across", "after", "afterwards", "again", "against", "all", "almost", "alone", "along", "already", "also","although","always","am","among", "amongst", "amoungst", "amount",  "an", "and", "another", "any","anyhow","anyone","anything","anyway", "anywhere", "are", "around", "as",  "at", "back","be","became", "because","become","becomes", "becoming", "been", "before", "beforehand", "behind", "being", "below", "beside", "besides", "between", "both", "bottom","but", "by", "call", "can", "cannot", "cant", "co", "con", "could", "couldnt", "cry", "de", "describe", "detail", "do", "done", "down", "due", "during", "each", "eg", "eight", "either", "eleven","else", "elsewhere", "empty", "enough", "etc", "even", "ever", "every", "everyone", "everything", "except", "few", "fifteen", "fifty", "fill", "find", "first", "five", "for", "former", "formerly", "forty", "found", "four", "from", "front", "full", "further", "get", "give", "go", "had", "has", "hasnt", "have", "he", "hence", "her", "here", "hereafter", "hereby", "herein", "hereupon", "hers", "herself", "him", "himself", "his", "how", "however", "hundred", "ie", "if", "in", "inc", "indeed", "interest", "into", "is", "it", "its", "itself", "keep", "last", "latter", "latterly", "least", "less", "ltd", "made", "many", "may", "me", "meanwhile", "might", "mill", "mine", "more", "moreover", "most", "mostly", "move", "much", "must", "my", "myself", "name", "namely", "neither", "never", "nevertheless", "next", "nine", "no", "nobody", "none", "noone", "nor", "not", "nothing", "now", "nowhere", "of", "off", "often", "on", "once", "one", "only", "onto", "or", "other", "others", "otherwise", "our", "ours", "ourselves", "out", "over", "own","part", "per", "perhaps", "please", "put", "rather", "re", "same", "see", "seem", "seemed", "seeming", "seems", "serious", "several", "she", "should", "show", "side", "since", "sincere", "six", "sixty", "so", "some", "somehow", "someone", "something", "sometime", "sometimes", "somewhere", "still", "such", "system", "take", "ten", "than", "that", "the", "their", "them", "themselves", "then", "thence", "there", "thereafter", "thereby", "therefore", "therein", "thereupon", "these", "they", "thickv", "thin", "third", "this", "those", "though", "three", "through", "thru", "thus", "to", "together", "too", "top", "toward", "towards", "twelve", "twenty", "two", "un", "under", "until", "up", "upon", "us", "very", "via", "was", "we", "well", "were", "what", "whatever", "when", "whence", "whenever", "where", "whereafter", "whereas", "whereby", "wherein", "whereupon", "wherever", "whether", "which", "while", "whither", "who", "whoever", "whole", "whom", "whose", "why", "will", "with", "within", "without", "would", "yet", "you", "your", "yours", "yourself", "yourselves", "the","this","com","buy"];
 
@@ -10854,7 +10855,7 @@ var graphdb = {
   }
 };
 
-var min_relevancy = 5;
+var min_relevancy = 2;
 
 var finalscoring = new Array();
 var exportarray = new Array();
@@ -11035,8 +11036,25 @@ function arrayKeys(input) {
 */	
 function insertContentFromPages(brandurl,callback_middle){
 	console.log('Retrieving content from:'+brandurl);
+	var options = {
+		url: brandurl,
+		headers: {
+        "user-agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+ (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2",
+        "accept-language" : "en-US,en;q=0.8",
+        "accept-language" : "en-US,en;q=0.8",
+		"accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+    	}
+	};
+
 	request(brandurl, {followAllRedirects:true}, function (error, response, body) {
-	  if (!error && response.statusCode == 200) {
+	  if(error && brandurl.indexOf('//www.')==-1){
+		  var newbrandurl = new Array();
+		  newbrandurl.splice(0,newbrandurl.length);
+		  var parsedUrl = {};
+		  parsedUrl = urllib.parse(brandurl);
+		  newbrandurl = parsedUrl.protocol +"//www."+parsedUrl.hostname;
+		  insertContentFromPages(newbrandurl,callback_middle);
+	  }else if (!error && response.statusCode == 200) {
 		var text = htmlToText.fromString(body, {
 		  wordwrap: false
 		});
